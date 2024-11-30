@@ -75,3 +75,106 @@
       - Storing up to `n` elements in the object (hash table) in the worst case.
   </div>
 </details>
+
+<details>
+<summary>Problem 4</summary>
+  <div>
+    
+  ### [Group Anagrams](https://leetcode.com/problems/group-anagrams/)
+  - Solution:
+    ```js
+    var groupAnagrams = function(strs) {
+        const object = new Object()
+        for(let i = 0; i < strs.length; i++){
+            const sorted = strs[i].split('').sort().join('')
+            if(sorted in object){
+                object[sorted].push(strs[i])
+            } else {
+                object[sorted] = [strs[i]]
+            }
+        }
+        return Object.values(object)
+    };
+    ```
+    - Time Complexity: $O(n \cdot k \log k)$
+      - Splitting each string into an array - $O(k)$, where `k` is the average length of the strings.
+      - Sorting each string's characters - $O(k \log k)$.
+      - Iterating through all strings in `strs` - $O(n)$, where `n` is the number of strings.
+    - Space Complexity: $O(n \cdot k)$
+      - Storing up to `n` strings in the `object`, with each string having a length of at most `k`.
+  </div>
+</details>
+
+<details>
+<summary>Problem 5</summary>
+  <div>
+    
+  ### [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)
+  - Solution:
+    ```js
+    var topKFrequent = function(nums, k) {
+        const object = new Object()
+        const array = new Array()
+        
+        for (let i = 0; i < nums.length; i++) {
+            if (nums[i] in object) {
+                object[nums[i]] += 1
+            } else {
+                object[nums[i]] = 1
+            }
+        }
+        
+        const sorted = Object.entries(object).sort((a, b) => b[1] - a[1])
+        
+        for (let i = 0; i < k; i++) {
+            array.push(Number(sorted[i][0]))
+        }
+        
+        return array
+    };
+    ```
+    - Time Complexity: $O(n \log n)$
+      - Counting frequencies - $O(n)$, where `n` is the length of the array.
+      - Sorting the entries of the object - $O(n \log n)$.
+    - Space Complexity: $O(n)$
+      - The space required for the `object`, `hash map` and the `array` to store the result.
+  </div>
+</details>
+
+<details>
+<summary>Problem 6</summary>
+  <div>
+    
+  ### [Valid Sudoku](https://leetcode.com/problems/valid-sudoku/)
+  - Solution:
+    ```js
+    var isValidSudoku = function(board) {
+        const rows = new Array(9).fill(null).map(() => new Set());
+        const cols = new Array(9).fill(null).map(() => new Set());
+        const boxes = new Array(9).fill(null).map(() => new Set());
+        
+        for (let i = 0; i < 9; i++) {
+            for (let j = 0; j < 9; j++) {
+                const num = board[i][j];
+                if (num !== '.') {
+                    
+                    const boxIndex = Math.floor(i / 3) * 3 + Math.floor(j / 3);
+                    
+                    if (rows[i].has(num) || cols[j].has(num) || boxes[boxIndex].has(num)) return false;
+    
+                    rows[i].add(num);
+                    cols[j].add(num);
+                    boxes[boxIndex].add(num);
+                }
+            }
+        }
+        return true;
+    };
+    ```
+    - Time Complexity: $O(1)$
+      - We iterate through all cells in a `fixed-size 9x9 grid` (constant size).
+      - For each cell, checking or adding a value to a `Set` takes constant time, $O(1)$.
+    - Space Complexity: $O(1)$
+      - We use `3 sets` for `rows`, `columns`, and `boxes`. Each set `holds at most 9 unique elements`, meaning the space used by these sets is `constant`.
+  </div>
+</details>
