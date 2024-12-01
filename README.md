@@ -178,3 +178,34 @@
       - We use `3 sets` for `rows`, `columns`, and `boxes`. Each set `holds at most 9 unique elements`, meaning the space used by these sets is `constant`.
   </div>
 </details>
+
+<details>
+<summary>Problem 7</summary>
+  <div>
+    
+  ### [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self)
+  - Solution:
+    ```js
+    var productExceptSelf = function(nums) {
+        const answer = new Array(nums.length).fill(1)
+    
+        let left_product = 1
+        for(let i = 0; i < nums.length; i++){
+            answer[i] *= left_product;
+            left_product *= nums[i]
+        }
+    
+        let right_product = 1
+        for(let i = nums.length - 1; i >= 0; i--){
+            answer[i] *= right_product
+            right_product *= nums[i]
+        }
+        return answer
+    };
+    ```
+    - Time Complexity: $O(n)$
+      - We make two passes through the array (`n` iterations each) to calculate the left and right products.
+    - Space Complexity: $O(1)$
+      - We only use a few extra variables (`left_product`, `right_product`), which take constant space.
+  </div>
+</details>
