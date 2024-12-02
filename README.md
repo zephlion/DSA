@@ -209,3 +209,37 @@
       - We only use a few extra variables (`left_product`, `right_product`), which take constant space.
   </div>
 </details>
+
+<details>
+<summary>Problem 8</summary>
+  <div>
+    
+  ### [Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/)
+  - Solution:
+    ```js
+    var longestConsecutive = function(nums) {
+        const set = new Set(nums);
+        let count = 0;
+    
+        for (let el of set) {  
+            if (!set.has(el - 1)) {
+                let len = 1;
+                while (set.has(el + len)) {
+                    len++;
+                }
+                count = Math.max(count, len);
+            }
+        }
+    
+        return count;
+    };
+    ```
+    - Time Complexity: $O(n)$
+      - Creating the `Set` - $O(n)$, where `n` is the number of elements in `nums`.
+      - `Iterating over the elements` of the `set` - $O(n)$.
+      - The inner `while loop` executes at most once for each consecutive sequence of numbers, so the total time is still $O(n)$.
+    - Space Complexity: $O(n)$
+      - The `Set` stores all unique elements in `nums`, requiring $O(n)$ space in the worst case.
+  </div>
+</details>
+
