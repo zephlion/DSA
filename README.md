@@ -243,3 +243,33 @@
   </div>
 </details>
 
+### Two Pointers
+<details>
+<summary>Problem 1</summary>
+  <div>
+    
+  ### [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
+  - Solution:
+    ```js
+    var isPalindrome = function(s) {
+        let left = 0, right = s.length - 1;
+        
+        while (left < right) {
+            if (!/[a-zA-Z0-9]/.test(s[left])) left++;
+            else if (!/[a-zA-Z0-9]/.test(s[right])) right--;
+            else if (s[left].toLowerCase() !== s[right].toLowerCase()) return false;
+            else {
+                left++;
+                right--;
+            }
+        }
+        return true;
+    };
+    ```
+    - Time Complexity - $O(n)$
+      - We iterate through the string once, where `n` is the length of the string. Each operation (skipping or comparing characters) is constant time.
+  
+    - Space Complexity - $O(1)$
+      - The solution uses constant extra space, with only a few variables (`left`, `right`) for traversal.
+  </div>
+</details>
