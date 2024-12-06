@@ -273,3 +273,54 @@
       - The solution uses constant extra space, with only a few variables (`left`, `right`) for traversal.
   </div>
 </details>
+
+<details>
+<summary>Problem 2</summary>
+  <div>
+    
+  ### [3Sum](https://leetcode.com/problems/3sum/)
+  - Solution:
+    ```js
+   
+    ```
+    - Time Complexity - $O(n)$
+      - 
+  
+    - Space Complexity - $O(1)$
+      - 
+  </div>
+</details>
+
+<details>
+<summary>Problem 3</summary>
+  <div>
+    
+  ### [Container With Most Water](https://leetcode.com/problems/container-with-most-water/)
+  - Solution:
+    ```js
+   
+    ```
+    - Time Complexity - $O(n)$
+      - 
+  
+    - Space Complexity - $O(1)$
+      - 
+  </div>
+</details>
+
+<details>
+<summary>Problem 4</summary>
+  <div>
+    
+  ### [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock)
+  - Solution:
+    ```js
+   
+    ```
+    - Time Complexity - $O(n)$
+      - 
+  
+    - Space Complexity - $O(1)$
+      - 
+  </div>
+</details>
