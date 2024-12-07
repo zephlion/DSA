@@ -278,6 +278,38 @@
 <summary>Problem 2</summary>
   <div>
     
+  ### [Two Sum II - Input Array Is Sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)
+  - Solution:
+    ```js
+    var twoSum = function(numbers, target) {
+        let left = 0, right = numbers.length - 1;
+        
+        while (left < right) {
+            const sum = numbers[left] + numbers[right];
+            
+            if (sum === target) {
+                return [left + 1, right + 1];
+            } else if (sum < target) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return [];
+    };
+    ```
+    - Time Complexity - $O(n)$
+      - We iterate through the array once with two pointers, so the time complexity is linear in terms of the number of elements (`n`).
+  
+    - Space Complexity - $O(1)$
+      - The solution uses a `constant amount of extra space`, with only a few variables for the pointers and the sum.
+  </div>
+</details>
+
+<details>
+<summary>Problem 3</summary>
+  <div>
+    
   ### [3Sum](https://leetcode.com/problems/3sum/)
   - Solution:
     ```js
@@ -292,7 +324,7 @@
 </details>
 
 <details>
-<summary>Problem 3</summary>
+<summary>Problem 4</summary>
   <div>
     
   ### [Container With Most Water](https://leetcode.com/problems/container-with-most-water/)
@@ -308,8 +340,9 @@
   </div>
 </details>
 
+### Sliding Window
 <details>
-<summary>Problem 4</summary>
+<summary>Problem 1</summary>
   <div>
     
   ### [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock)
