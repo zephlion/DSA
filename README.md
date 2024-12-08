@@ -313,13 +313,50 @@
   ### [3Sum](https://leetcode.com/problems/3sum/)
   - Solution:
     ```js
-   
+     var threeSum = function (nums) {
+        const result = new Array();
+        const sorted = nums.sort((a, b) => a - b);
+    
+        for (let i = 0; i < sorted.length; i++) {
+            if (sorted[i] > 0) break;
+    
+            if (i > 0 && sorted[i] === sorted[i - 1]) continue;
+    
+            let j = i + 1;
+            let k = sorted.length - 1;
+    
+            while (j < k) {
+                let total = sorted[i] + sorted[j] + sorted[k];
+    
+                if (total > 0) {
+                    k--;
+                } else if (total < 0) {
+                    j++;
+                } else {
+                    result.push([sorted[i], sorted[j], sorted[k]]);
+    
+                    while (j < k && sorted[j] === sorted[j + 1]) {
+                        j++;
+                    }
+    
+                    while (j < k && sorted[k] === sorted[k - 1]) {
+                        k--;
+                    }
+    
+                    j++;
+                    k--;
+                }
+            }
+        }
+    
+        return result;
+    };
     ```
-    - Time Complexity - $O(n)$
-      - 
+    - Time Complexity -  $O(n^2)$
+      - We sort the array in $O(n \log n)$, and for each element, we perform a two-pointer search which takes $O(n)$, resulting in a total complexity of $O(n^2)$.
   
     - Space Complexity - $O(1)$
-      - 
+      - The solution uses constant extra space (excluding the output array). The sorting and two-pointer techniques only use a fixed amount of additional space.
   </div>
 </details>
 
