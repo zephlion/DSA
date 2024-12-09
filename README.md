@@ -367,13 +367,26 @@
   ### [Container With Most Water](https://leetcode.com/problems/container-with-most-water/)
   - Solution:
     ```js
-   
+    var maxArea = function(height) {
+        let area = 0
+        let left = 0
+        let right = height.length - 1
+        while(left < right){
+            area = Math.max(area, (right - left) * Math.min(height[left], height[right]))
+            if(height[left] < height[right]){
+                left++
+            } else {
+                right--
+            }
+        }
+        return area
+    };
     ```
     - Time Complexity - $O(n)$
-      - 
+      - We iterate through the array once with two pointers (`left` and `right`), so the time complexity is linear in terms of the number of elements (`n`).
   
     - Space Complexity - $O(1)$
-      - 
+      - The solution uses `constant extra space`, with only a few variables to track the pointers and the maximum area.
   </div>
 </details>
 
