@@ -2,23 +2,53 @@
 
 ### Array & Hashing  
 <details>
-<summary>Problem 1</summary>
-  <div>
-    
-  ### [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
-  - Solution:
-    ```js
-    var containsDuplicate = nums => new Set(nums).size !== nums.length;
-    ```
-    - Time Complexity - $O(n)$
-      - Creating a `Set` - $O(n)$
-      - `.size` property - $O(1)$
-      - Comparison `!==` - $O(1)$
-  
-    - Space Complexity - $O(n)$
-      - Worst case scenario, store all elements in a `Set` - $O(n)$
-  </div>
+<summary>Problem 1 - Contains Duplicate</summary>
+
+### 🔗 [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/)
+
+#### 📝 Problem
+
+Given an integer array `nums`, return `true` if any value appears **at least twice** in the array, and `false` if every element is distinct.
+
+---
+
+#### 💡 Approach / Intuition
+
+* Use a **Set** which automatically stores only unique values.
+* If the size of the `Set` is **smaller** than the length of the array, that means duplicates exist.
+
+---
+
+#### 💻 Code
+
+```js
+var containsDuplicate = nums => new Set(nums).size !== nums.length;
+```
+
+---
+
+#### ⏱️ Time Complexity
+
+* Creating a `Set`: **O(n)**
+* Checking `.size`: **O(1)**
+* Comparison: **O(1)**
+  **➡ Overall: O(n)**
+
+#### 🗂️ Space Complexity
+
+* In the worst case, all `n` elements are unique → stored in the `Set`.
+  **➡ O(n)**
+
+---
+
+#### 🧠 Notes
+
+* This is the most concise solution.
+* Alternative: Use a **HashMap** or manual iteration to check duplicates.
+* Good to compare against the **brute force O(n²)** approach to appreciate efficiency.
+
 </details>
+
 
 <details>
 <summary>Problem 2</summary>
