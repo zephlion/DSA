@@ -51,33 +51,65 @@ var containsDuplicate = nums => new Set(nums).size !== nums.length;
 
 
 <details>
-<summary>Problem 2</summary>
-  <div>
+<summary>Problem 2 - Valid Anagram</summary>
+
+### 🔗 [Valid Anagram](https://leetcode.com/problems/valid-anagram/)
+
+#### 📝 Problem
+
+Given two strings `s` and `t`, return `true` if `t` is an anagram of `s`, and `false` otherwise. An **anagram** is a word or phrase formed by rearranging the letters of another.
+
+---
+
+#### 💡 Approach / Intuition
+
+* If the strings have different lengths, they cannot be anagrams.
+* Use an array of size **26** (for each lowercase English letter).
+* Increment counts for characters in `s`, decrement counts for characters in `t`.
+* At the end, if all counts are zero, then the two strings are anagrams.
+
+---
+
+#### 💻 Code
+
+```js
+var isAnagram = function(s, t) {
+    if (s.length !== t.length) return false;
     
-  ### [Valid Anagram](https://leetcode.com/problems/valid-anagram/)
-  - Solution:
-    ```js
-    var isAnagram = function(s, t) {
-        if (s.length !== t.length) return false
-        
-        const alphabet = new Array(26).fill(0)
-    
-        for(let index = 0; index < s.length; index++){
-            alphabet[s.charCodeAt(index) - 'a'.charCodeAt(0)]++
-            alphabet[t.charCodeAt(index) - 'a'.charCodeAt(0)]--
-        }
-    
-        return alphabet.every(letter => letter === 0)
-    };
-    ```
-    - Time Complexity: $O(n)$
-      - Comparing the lengths of `s` and `t` - $O(1)$
-      - Iterating over the string `s` and `t` - $O(n)$, where $n$ is the length of the strings.
-      - The `every` method - $O(26)$, which is a constant operation.
-    - Space Complexity: $O(1)$
-      - The `alphabet` array has a fixed size of 26, regardless of the input size.
-  </div>
+    const alphabet = new Array(26).fill(0);
+
+    for (let index = 0; index < s.length; index++) {
+        alphabet[s.charCodeAt(index) - 'a'.charCodeAt(0)]++;
+        alphabet[t.charCodeAt(index) - 'a'.charCodeAt(0)]--;
+    }
+
+    return alphabet.every(letter => letter === 0);
+};
+```
+
+---
+
+#### ⏱️ Time Complexity
+
+* Comparing lengths: **O(1)**
+* Iterating over both strings: **O(n)**
+* Checking with `every`: **O(26)** → constant
+  **➡ Overall: O(n)**
+
+#### 🗂️ Space Complexity
+
+* Fixed array of size 26 regardless of input size.
+  **➡ O(1)**
+
+---
+
+#### 🧠 Notes
+
+* This solution is efficient and avoids sorting (which would be **O(n log n)**).
+* Works only for lowercase English letters. If input includes Unicode/uppercase, need a `Map` or `Object` for flexibility.
+
 </details>
+
 
 <details>
 <summary>Problem 3</summary>
