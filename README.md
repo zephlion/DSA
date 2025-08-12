@@ -112,31 +112,63 @@ var isAnagram = function(s, t) {
 
 
 <details>
-<summary>Problem 3</summary>
-  <div>
-    
-  ### [Two Sum](https://leetcode.com/problems/two-sum/)
-  - Solution:
-    ```js
-    var twoSum = function(nums, target) {
-    const object = new Object()
+<summary>Problem 3 - Two Sum</summary>
 
-    for(let index = 0; index < nums.length; index++){
-        const current = nums[index]
-        if(target - current in object){
-            return [index, object[target - current]]
+### 🔗 [Two Sum](https://leetcode.com/problems/two-sum/)
+
+#### 📝 Problem
+
+Given an array of integers `nums` and an integer `target`, return the indices of the two numbers such that they add up to `target`. You may assume that each input would have **exactly one solution**, and you may not use the same element twice.
+
+---
+
+#### 💡 Approach / Intuition
+
+* Use a **hash map** to store numbers we’ve already seen along with their indices.
+* For each number `current`, check if `target - current` already exists in the map.
+* If it does, return the indices. If not, store the current number and its index in the map.
+
+---
+
+#### 💻 Code
+
+```js
+var twoSum = function(nums, target) {
+    const object = new Object();
+
+    for (let index = 0; index < nums.length; index++) {
+        const current = nums[index];
+        if (target - current in object) {
+            return [index, object[target - current]];
         }
-        object[current] = index
-      }
-    };
-    ```
-    - Time Complexity: $O(n)$
-      - Iterating over the `nums` array - $O(n)$, where $n$ is the length of the array.
-      - Checking for the existence of `target - current` in the `object` (hash lookup) - $O(1)$.
-    - Space Complexity: $O(n)$
-      - Storing up to `n` elements in the object (hash table) in the worst case.
-  </div>
+        object[current] = index;
+    }
+};
+```
+
+---
+
+#### ⏱️ Time Complexity
+
+* Iterating over `nums`: **O(n)**
+* Hash lookup (`target - current in object`): **O(1)**
+  **➡ Overall: O(n)**
+
+#### 🗂️ Space Complexity
+
+* In the worst case, store all `n` elements in the hash map.
+  **➡ O(n)**
+
+---
+
+#### 🧠 Notes
+
+* This is the **optimal solution** using hashing.
+* A brute-force solution would check all pairs (nested loops), resulting in **O(n²)** time.
+* Be mindful of returning the indices in the **correct order**.
+
 </details>
+
 
 <details>
 <summary>Problem 4</summary>
