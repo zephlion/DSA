@@ -171,33 +171,66 @@ var twoSum = function(nums, target) {
 
 
 <details>
-<summary>Problem 4</summary>
-  <div>
-    
-  ### [Group Anagrams](https://leetcode.com/problems/group-anagrams/)
-  - Solution:
-    ```js
-    var groupAnagrams = function(strs) {
-        const object = new Object()
-        for(let i = 0; i < strs.length; i++){
-            const sorted = strs[i].split('').sort().join('')
-            if(sorted in object){
-                object[sorted].push(strs[i])
-            } else {
-                object[sorted] = [strs[i]]
-            }
+<summary>Problem 4 - Group Anagrams</summary>
+
+### 🔗 [Group Anagrams](https://leetcode.com/problems/group-anagrams/)
+
+#### 📝 Problem
+
+Given an array of strings `strs`, group the anagrams together. You can return the answer in **any order**.
+
+---
+
+#### 💡 Approach / Intuition
+
+* Anagrams have the same characters when sorted.
+* Sort each string alphabetically → use it as a key in a hash map.
+* Group strings with the same sorted key together.
+* Return all grouped values from the hash map.
+
+---
+
+#### 💻 Code
+
+```js
+var groupAnagrams = function(strs) {
+    const object = new Object();
+    for (let i = 0; i < strs.length; i++) {
+        const sorted = strs[i].split('').sort().join('');
+        if (sorted in object) {
+            object[sorted].push(strs[i]);
+        } else {
+            object[sorted] = [strs[i]];
         }
-        return Object.values(object)
-    };
-    ```
-    - Time Complexity: $O(n \cdot k \log k)$
-      - Splitting each string into an array - $O(k)$, where `k` is the average length of the strings.
-      - Sorting each string's characters - $O(k \log k)$.
-      - Iterating through all strings in `strs` - $O(n)$, where `n` is the number of strings.
-    - Space Complexity: $O(n \cdot k)$
-      - Storing up to `n` strings in the `object`, with each string having a length of at most `k`.
-  </div>
+    }
+    return Object.values(object);
+};
+```
+
+---
+
+#### ⏱️ Time Complexity
+
+* Splitting each string: **O(k)**
+* Sorting each string: **O(k log k)**
+* Processing all strings: **O(n)**
+  **➡ Overall: O(n · k log k)**
+
+#### 🗂️ Space Complexity
+
+* Hash map stores up to `n` strings with average length `k`.
+  **➡ O(n · k)**
+
+---
+
+#### 🧠 Notes
+
+* Sorting-based approach is simple and effective.
+* Alternative: use **character frequency counts** as keys for an **O(n · k)** solution.
+* Useful problem for practicing **hash maps + string manipulation**.
+
 </details>
+
 
 <details>
 <summary>Problem 5</summary>
