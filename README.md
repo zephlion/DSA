@@ -233,40 +233,73 @@ var groupAnagrams = function(strs) {
 
 
 <details>
-<summary>Problem 5</summary>
-  <div>
+<summary>Problem 5 - Top K Frequent Elements</summary>
+
+### 🔗 [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)
+
+#### 📝 Problem
+
+Given an integer array `nums` and an integer `k`, return the `k` most frequent elements. You may return the answer in **any order**.
+
+---
+
+#### 💡 Approach / Intuition
+
+* Count the frequency of each element using a hash map.
+* Sort the elements by their frequency in descending order.
+* Extract the first `k` elements from the sorted result.
+
+---
+
+#### 💻 Code
+
+```js
+var topKFrequent = function(nums, k) {
+    const object = new Object();
+    const array = new Array();
     
-  ### [Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)
-  - Solution:
-    ```js
-    var topKFrequent = function(nums, k) {
-        const object = new Object()
-        const array = new Array()
-        
-        for (let i = 0; i < nums.length; i++) {
-            if (nums[i] in object) {
-                object[nums[i]] += 1
-            } else {
-                object[nums[i]] = 1
-            }
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] in object) {
+            object[nums[i]] += 1;
+        } else {
+            object[nums[i]] = 1;
         }
-        
-        const sorted = Object.entries(object).sort((a, b) => b[1] - a[1])
-        
-        for (let i = 0; i < k; i++) {
-            array.push(Number(sorted[i][0]))
-        }
-        
-        return array
-    };
-    ```
-    - Time Complexity: $O(n \log n)$
-      - Counting frequencies - $O(n)$, where `n` is the length of the array.
-      - Sorting the entries of the object - $O(n \log n)$.
-    - Space Complexity: $O(n)$
-      - The space required for the `object`, `hash map` and the `array` to store the result.
-  </div>
+    }
+    
+    const sorted = Object.entries(object).sort((a, b) => b[1] - a[1]);
+    
+    for (let i = 0; i < k; i++) {
+        array.push(Number(sorted[i][0]));
+    }
+    
+    return array;
+};
+```
+
+---
+
+#### ⏱️ Time Complexity
+
+* Counting frequencies: **O(n)**
+* Sorting frequencies: **O(n log n)**
+  **➡ Overall: O(n log n)**
+
+#### 🗂️ Space Complexity
+
+* Hash map to store frequencies: **O(n)**
+* Result array: up to **O(k)**
+  **➡ O(n)**
+
+---
+
+#### 🧠 Notes
+
+* This approach is straightforward but involves sorting.
+* Optimized approach: use a **bucket sort** or **heap/priority queue** to achieve **O(n)** time.
+* Useful problem for practicing **frequency counting + sorting/heap techniques**.
+
 </details>
+
 
 <details>
 <summary>Problem 6</summary>
