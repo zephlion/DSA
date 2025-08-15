@@ -302,42 +302,86 @@ var topKFrequent = function(nums, k) {
 
 
 <details>
-<summary>Problem 6</summary>
-  <div>
+<summary>Problem 6 - Valid Sudoku</summary>
+
+### 🔗 [Valid Sudoku](https://leetcode.com/problems/valid-sudoku/)
+
+#### 📝 Problem
+
+Determine if a `9 x 9` Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
+
+1. Each row must contain the digits `1-9` without repetition.
+2. Each column must contain the digits `1-9` without repetition.
+3. Each of the nine `3 x 3` sub-boxes must contain the digits `1-9` without repetition.
+
+---
+
+#### 💡 Approach / Intuition
+
+* Use **three sets of hash sets**:
+
+  * `rows[i]` to track digits in each row.
+  * `cols[j]` to track digits in each column.
+  * `boxes[boxIndex]` to track digits in each 3x3 sub-grid.
+* For each cell:
+
+  * Skip if it's `.`.
+  * Calculate its `boxIndex = Math.floor(i / 3) * 3 + Math.floor(j / 3)`.
+  * If the digit is already in the row, column, or box → return `false`.
+  * Otherwise, add it to all three.
+* If no conflicts, return `true`.
+
+---
+
+#### 💻 Code
+
+```js
+var isValidSudoku = function(board) {
+    const rows = new Array(9).fill(null).map(() => new Set());
+    const cols = new Array(9).fill(null).map(() => new Set());
+    const boxes = new Array(9).fill(null).map(() => new Set());
     
-  ### [Valid Sudoku](https://leetcode.com/problems/valid-sudoku/)
-  - Solution:
-    ```js
-    var isValidSudoku = function(board) {
-        const rows = new Array(9).fill(null).map(() => new Set());
-        const cols = new Array(9).fill(null).map(() => new Set());
-        const boxes = new Array(9).fill(null).map(() => new Set());
-        
-        for (let i = 0; i < 9; i++) {
-            for (let j = 0; j < 9; j++) {
-                const num = board[i][j];
-                if (num !== '.') {
-                    
-                    const boxIndex = Math.floor(i / 3) * 3 + Math.floor(j / 3);
-                    
-                    if (rows[i].has(num) || cols[j].has(num) || boxes[boxIndex].has(num)) return false;
-    
-                    rows[i].add(num);
-                    cols[j].add(num);
-                    boxes[boxIndex].add(num);
+    for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+            const num = board[i][j];
+            if (num !== '.') {
+                const boxIndex = Math.floor(i / 3) * 3 + Math.floor(j / 3);
+                if (rows[i].has(num) || cols[j].has(num) || boxes[boxIndex].has(num)) {
+                    return false;
                 }
+                rows[i].add(num);
+                cols[j].add(num);
+                boxes[boxIndex].add(num);
             }
         }
-        return true;
-    };
-    ```
-    - Time Complexity: $O(1)$
-      - We iterate through all cells in a `fixed-size 9x9 grid` (constant size).
-      - For each cell, checking or adding a value to a `Set` takes constant time, $O(1)$.
-    - Space Complexity: $O(1)$
-      - We use `3 sets` for `rows`, `columns`, and `boxes`. Each set `holds at most 9 unique elements`, meaning the space used by these sets is `constant`.
-  </div>
+    }
+    return true;
+};
+```
+
+---
+
+#### ⏱️ Time Complexity
+
+* Iterating through a `9x9` board: **O(1)** (constant size).
+* Each set operation: **O(1)**.
+* **➡ Overall: O(1)**
+
+#### 🗂️ Space Complexity
+
+* Three arrays of 9 sets each, with at most 9 elements in each set.
+  **➡ O(1)** (constant space).
+
+---
+
+#### 🧠 Notes
+
+* Since the board size is fixed (`9x9`), time and space complexity are constant.
+* Important edge case: ensure **sub-box indexing** is correct.
+* This solution can be extended for generalized Sudoku boards by scaling the iteration and box calculation.
+
 </details>
+
 
 <details>
 <summary>Problem 7</summary>
