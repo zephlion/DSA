@@ -384,35 +384,77 @@ var isValidSudoku = function(board) {
 
 
 <details>
-<summary>Problem 7</summary>
-  <div>
-    
-  ### [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self)
-  - Solution:
-    ```js
-    var productExceptSelf = function(nums) {
-        const answer = new Array(nums.length).fill(1)
-    
-        let left_product = 1
-        for(let i = 0; i < nums.length; i++){
-            answer[i] *= left_product;
-            left_product *= nums[i]
-        }
-    
-        let right_product = 1
-        for(let i = nums.length - 1; i >= 0; i--){
-            answer[i] *= right_product
-            right_product *= nums[i]
-        }
-        return answer
-    };
-    ```
-    - Time Complexity: $O(n)$
-      - We make two passes through the array (`n` iterations each) to calculate the left and right products.
-    - Space Complexity: $O(1)$
-      - We only use a few extra variables (`left_product`, `right_product`), which take constant space.
-  </div>
+<summary>Problem 7 - Product of Array Except Self</summary>
+
+### 🔗 [Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self)
+
+#### 📝 Problem
+
+Given an integer array `nums`, return an array `answer` such that `answer[i]` is equal to the product of all the elements of `nums` except `nums[i]`.
+
+The algorithm should run in **O(n)** time and without using division.
+
+---
+
+#### 💡 Approach / Intuition
+
+* Use **two passes** to calculate prefix and suffix products:
+
+  * **Left pass**: Compute the running product of all numbers to the left of `i`.
+  * **Right pass**: Compute the running product of all numbers to the right of `i`.
+* Multiply left and right products for each index.
+* Store results in the same `answer` array to maintain **O(1) extra space**.
+
+---
+
+#### 💻 Code
+
+```js
+var productExceptSelf = function(nums) {
+    const answer = new Array(nums.length).fill(1);
+
+    let left_product = 1;
+    for (let i = 0; i < nums.length; i++) {
+        answer[i] *= left_product;
+        left_product *= nums[i];
+    }
+
+    let right_product = 1;
+    for (let i = nums.length - 1; i >= 0; i--) {
+        answer[i] *= right_product;
+        right_product *= nums[i];
+    }
+
+    return answer;
+};
+```
+
+---
+
+#### ⏱️ Time Complexity
+
+* Two passes through `nums` → **O(n)**.
+* Constant work inside each loop.
+* **➡ Overall: O(n)**
+
+#### 🗂️ Space Complexity
+
+* Output array excluded (per problem statement).
+* Only `left_product` and `right_product` variables used.
+* **➡ O(1)** extra space.
+
+---
+
+#### 🧠 Notes
+
+* Division is not allowed, so prefix/suffix method is optimal.
+* The solution handles **zero values** correctly:
+
+  * If there are two or more zeros, all results are zero.
+  * If exactly one zero exists, only that index will have the product of non-zero elements, others are zero.
+
 </details>
+
 
 <details>
 <summary>Problem 8</summary>
