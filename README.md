@@ -457,37 +457,71 @@ var productExceptSelf = function(nums) {
 
 
 <details>
-<summary>Problem 8</summary>
-  <div>
-    
-  ### [Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/)
-  - Solution:
-    ```js
-    var longestConsecutive = function(nums) {
-        const set = new Set(nums);
-        let count = 0;
-    
-        for (let el of set) {  
-            if (!set.has(el - 1)) {
-                let len = 1;
-                while (set.has(el + len)) {
-                    len++;
-                }
-                count = Math.max(count, len);
+<summary>Problem 8 - Longest Consecutive Sequence</summary>
+
+### 🔗 [Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/)
+
+#### 📝 Problem
+
+Given an unsorted array of integers `nums`, return the length of the longest consecutive elements sequence.
+
+The algorithm should run in **O(n)** time.
+
+---
+
+#### 💡 Approach / Intuition
+
+* Use a **HashSet** to store all unique numbers in `nums`.
+* For each number, check if it is the **start of a sequence** (i.e., `num - 1` is not in the set).
+* If it is the start, extend the sequence by checking consecutive numbers (`num + 1`, `num + 2`, …).
+* Track the maximum length seen.
+
+---
+
+#### 💻 Code
+
+```js
+var longestConsecutive = function(nums) {
+    const set = new Set(nums);
+    let count = 0;
+
+    for (let el of set) {
+        if (!set.has(el - 1)) {
+            let len = 1;
+            while (set.has(el + len)) {
+                len++;
             }
+            count = Math.max(count, len);
         }
-    
-        return count;
-    };
-    ```
-    - Time Complexity: $O(n)$
-      - Creating the `Set` - $O(n)$, where `n` is the number of elements in `nums`.
-      - `Iterating over the elements` of the `set` - $O(n)$.
-      - The inner `while loop` executes at most once for each consecutive sequence of numbers, so the total time is still $O(n)$.
-    - Space Complexity: $O(n)$
-      - The `Set` stores all unique elements in `nums`, requiring $O(n)$ space in the worst case.
-  </div>
+    }
+
+    return count;
+};
+```
+
+---
+
+#### ⏱️ Time Complexity
+
+* Creating the set → **O(n)**.
+* Iterating over set elements → **O(n)**.
+* Inner `while` loop runs only across sequences once → amortized **O(n)**.
+* **➡ Overall: O(n)**
+
+#### 🗂️ Space Complexity
+
+* HashSet stores all unique elements → **O(n)**.
+
+---
+
+#### 🧠 Notes
+
+* Works even if numbers are unsorted.
+* Efficient since each number is checked at most twice.
+* Skips redundant checks by only starting sequences at their smallest element.
+
 </details>
+
 
 ### Two Pointers
 <details>
