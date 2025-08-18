@@ -525,34 +525,69 @@ var longestConsecutive = function(nums) {
 
 ### Two Pointers
 <details>
-<summary>Problem 1</summary>
-  <div>
-    
-  ### [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
-  - Solution:
-    ```js
-    var isPalindrome = function(s) {
-        let left = 0, right = s.length - 1;
-        
-        while (left < right) {
-            if (!/[a-zA-Z0-9]/.test(s[left])) left++;
-            else if (!/[a-zA-Z0-9]/.test(s[right])) right--;
-            else if (s[left].toLowerCase() !== s[right].toLowerCase()) return false;
-            else {
-                left++;
-                right--;
-            }
+<summary>Problem 1 - Valid Palindrome</summary>
+
+### 🔗 [Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
+
+#### 📝 Problem
+
+A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward.
+
+Given a string `s`, return `true` if it is a palindrome, or `false` otherwise.
+
+---
+
+#### 💡 Approach / Intuition
+
+* Use **two pointers** (`left` and `right`) to traverse the string from both ends.
+* Skip non-alphanumeric characters.
+* Compare characters in lowercase.
+* If a mismatch is found → return `false`.
+* If pointers cross without mismatches → return `true`.
+
+---
+
+#### 💻 Code
+
+```js
+var isPalindrome = function(s) {
+    let left = 0, right = s.length - 1;
+
+    while (left < right) {
+        if (!/[a-zA-Z0-9]/.test(s[left])) left++;
+        else if (!/[a-zA-Z0-9]/.test(s[right])) right--;
+        else if (s[left].toLowerCase() !== s[right].toLowerCase()) return false;
+        else {
+            left++;
+            right--;
         }
-        return true;
-    };
-    ```
-    - Time Complexity - $O(n)$
-      - We iterate through the string once, where `n` is the length of the string. Each operation (skipping or comparing characters) is constant time.
-  
-    - Space Complexity - $O(1)$
-      - The solution uses constant extra space, with only a few variables (`left`, `right`) for traversal.
-  </div>
+    }
+    return true;
+};
+```
+
+---
+
+#### ⏱️ Time Complexity
+
+* Single pass through the string → **O(n)**.
+* Each character is checked/skipped/compared once.
+
+#### 🗂️ Space Complexity
+
+* Only variables `left` and `right` used.
+* **➡ O(1)** extra space.
+
+---
+
+#### 🧠 Notes
+
+* Works with empty strings → returns `true`.
+* Handles all cases (uppercase, lowercase, spaces, punctuation, numbers).
+* Efficient and avoids building new strings.
+
 </details>
+
 
 <details>
 <summary>Problem 2</summary>
