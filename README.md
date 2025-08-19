@@ -590,36 +590,73 @@ var isPalindrome = function(s) {
 
 
 <details>
-<summary>Problem 2</summary>
-  <div>
-    
-  ### [Two Sum II - Input Array Is Sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)
-  - Solution:
-    ```js
-    var twoSum = function(numbers, target) {
-        let left = 0, right = numbers.length - 1;
-        
-        while (left < right) {
-            const sum = numbers[left] + numbers[right];
-            
-            if (sum === target) {
-                return [left + 1, right + 1];
-            } else if (sum < target) {
-                left++;
-            } else {
-                right--;
-            }
+<summary>Problem 2 - Two Sum II (Input Array Is Sorted)</summary>
+
+### 🔗 [Two Sum II - Input Array Is Sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)
+
+#### 📝 Problem
+
+Given a **1-indexed** array of integers `numbers` that is sorted in non-decreasing order, find two numbers such that they add up to a specific target number. Return the indices of the two numbers, `index1` and `index2`, as an integer array `[index1, index2]`.
+
+The tests are generated such that there is exactly **one solution**. You may not use the same element twice.
+
+---
+
+#### 💡 Approach / Intuition
+
+* Since the array is **sorted**, we can use the **two-pointer technique**:
+
+  * Initialize `left` pointer at the start and `right` pointer at the end.
+  * If the sum of values at both pointers is equal to the target → return indices.
+  * If the sum is less than the target → increment `left` (to increase sum).
+  * If the sum is greater than the target → decrement `right` (to decrease sum).
+
+---
+
+#### 💻 Code
+
+```js
+var twoSum = function(numbers, target) {
+    let left = 0, right = numbers.length - 1;
+
+    while (left < right) {
+        const sum = numbers[left] + numbers[right];
+
+        if (sum === target) {
+            return [left + 1, right + 1];
+        } else if (sum < target) {
+            left++;
+        } else {
+            right--;
         }
-        return [];
-    };
-    ```
-    - Time Complexity - $O(n)$
-      - We iterate through the array once with two pointers, so the time complexity is linear in terms of the number of elements (`n`).
-  
-    - Space Complexity - $O(1)$
-      - The solution uses a `constant amount of extra space`, with only a few variables for the pointers and the sum.
-  </div>
+    }
+
+    return [];
+};
+```
+
+---
+
+#### ⏱️ Time Complexity
+
+* Two-pointer traversal through the array → **O(n)**.
+* Each iteration does constant work.
+* **➡ Overall: O(n)**
+
+#### 🗂️ Space Complexity
+
+* Only a few variables used (`left`, `right`, `sum`).
+* **➡ O(1)** extra space.
+
+---
+
+#### 🧠 Notes
+
+* The array is **1-indexed**, so add `+1` when returning results.
+* Since the array is sorted, binary search is another option, but two pointers is more efficient.
+
 </details>
+
 
 <details>
 <summary>Problem 3</summary>
