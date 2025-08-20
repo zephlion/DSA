@@ -659,58 +659,99 @@ var twoSum = function(numbers, target) {
 
 
 <details>
-<summary>Problem 3</summary>
-  <div>
-    
-  ### [3Sum](https://leetcode.com/problems/3sum/)
-  - Solution:
-    ```js
-     var threeSum = function (nums) {
-        const result = new Array();
-        const sorted = nums.sort((a, b) => a - b);
-    
-        for (let i = 0; i < sorted.length; i++) {
-            if (sorted[i] > 0) break;
-    
-            if (i > 0 && sorted[i] === sorted[i - 1]) continue;
-    
-            let j = i + 1;
-            let k = sorted.length - 1;
-    
-            while (j < k) {
-                let total = sorted[i] + sorted[j] + sorted[k];
-    
-                if (total > 0) {
-                    k--;
-                } else if (total < 0) {
-                    j++;
-                } else {
-                    result.push([sorted[i], sorted[j], sorted[k]]);
-    
-                    while (j < k && sorted[j] === sorted[j + 1]) {
-                        j++;
-                    }
-    
-                    while (j < k && sorted[k] === sorted[k - 1]) {
-                        k--;
-                    }
-    
-                    j++;
-                    k--;
-                }
+<summary>Problem 3 - 3Sum</summary>
+
+### 🔗 [3Sum](https://leetcode.com/problems/3sum/)
+
+#### 📝 Problem
+
+Given an integer array `nums`, return all the triplets `[nums[i], nums[j], nums[k]]` such that:
+
+* `i != j`, `i != k`, and `j != k`.
+* `nums[i] + nums[j] + nums[k] == 0`.
+
+Notice that the solution set must not contain duplicate triplets.
+
+---
+
+#### 💡 Approach / Intuition
+
+* First, **sort** the array.
+* Iterate through the array with index `i`:
+
+  * Skip duplicates for `i` to avoid repeating results.
+  * Use two pointers `j` (left) and `k` (right) to find pairs such that:
+
+    * If `nums[i] + nums[j] + nums[k] > 0`, move `k` left.
+    * If `nums[i] + nums[j] + nums[k] < 0`, move `j` right.
+    * If equal to 0, push the triplet to result, then skip duplicates for `j` and `k`.
+
+This ensures all unique triplets are found.
+
+---
+
+#### 💻 Code
+
+```js
+var threeSum = function(nums) {
+    const result = [];
+    nums.sort((a, b) => a - b);
+
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] > 0) break;
+        if (i > 0 && nums[i] === nums[i - 1]) continue;
+
+        let j = i + 1;
+        let k = nums.length - 1;
+
+        while (j < k) {
+            let total = nums[i] + nums[j] + nums[k];
+
+            if (total > 0) {
+                k--;
+            } else if (total < 0) {
+                j++;
+            } else {
+                result.push([nums[i], nums[j], nums[k]]);
+
+                while (j < k && nums[j] === nums[j + 1]) j++;
+                while (j < k && nums[k] === nums[k - 1]) k--;
+
+                j++;
+                k--;
             }
         }
-    
-        return result;
-    };
-    ```
-    - Time Complexity -  $O(n^2)$
-      - We sort the array in $O(n \log n)$, and for each element, we perform a two-pointer search which takes $O(n)$, resulting in a total complexity of $O(n^2)$.
-  
-    - Space Complexity - $O(1)$
-      - The solution uses constant extra space (excluding the output array). The sorting and two-pointer techniques only use a fixed amount of additional space.
-  </div>
+    }
+
+    return result;
+};
+```
+
+---
+
+#### ⏱️ Time Complexity
+
+* Sorting takes **O(n log n)**.
+* Outer loop runs **O(n)** times.
+* Inner two-pointer traversal runs in **O(n)**.
+* **➡ Overall: O(n²)**
+
+#### 🗂️ Space Complexity
+
+* Sorting is in-place.
+* Only a few extra variables (`i`, `j`, `k`, `total`).
+* **➡ O(1)** extra space (excluding output).
+
+---
+
+#### 🧠 Notes
+
+* Sorting simplifies duplicate handling.
+* Two-pointer search avoids brute-force O(n³) solutions.
+* Works efficiently for medium-sized input arrays.
+
 </details>
+
 
 <details>
 <summary>Problem 4</summary>
