@@ -754,34 +754,75 @@ var threeSum = function(nums) {
 
 
 <details>
-<summary>Problem 4</summary>
-  <div>
-    
-  ### [Container With Most Water](https://leetcode.com/problems/container-with-most-water/)
-  - Solution:
-    ```js
-    var maxArea = function(height) {
-        let area = 0
-        let left = 0
-        let right = height.length - 1
-        while(left < right){
-            area = Math.max(area, (right - left) * Math.min(height[left], height[right]))
-            if(height[left] < height[right]){
-                left++
-            } else {
-                right--
-            }
+<summary>Problem 4 - Container With Most Water</summary>
+
+### 🔗 [Container With Most Water](https://leetcode.com/problems/container-with-most-water/)
+
+#### 📝 Problem
+
+You are given an integer array `height` of length `n`. There are `n` vertical lines drawn such that the two endpoints of the `i`th line are `(i, 0)` and `(i, height[i])`.
+
+Find two lines that together with the x-axis form a container, such that the container contains the most water.
+
+Return the maximum amount of water a container can store.
+
+---
+
+#### 💡 Approach / Intuition
+
+* Use the **two-pointer technique**:
+
+  * Start with one pointer at the beginning (`left`) and one at the end (`right`).
+  * Calculate the area formed between the two lines.
+  * Move the pointer pointing to the shorter line inward (since the height is limited by the shorter line, moving it may increase area).
+  * Continue until the pointers meet.
+
+---
+
+#### 💻 Code
+
+```js
+var maxArea = function(height) {
+    let area = 0;
+    let left = 0;
+    let right = height.length - 1;
+
+    while (left < right) {
+        area = Math.max(area, (right - left) * Math.min(height[left], height[right]));
+
+        if (height[left] < height[right]) {
+            left++;
+        } else {
+            right--;
         }
-        return area
-    };
-    ```
-    - Time Complexity - $O(n)$
-      - We iterate through the array once with two pointers (`left` and `right`), so the time complexity is linear in terms of the number of elements (`n`).
-  
-    - Space Complexity - $O(1)$
-      - The solution uses `constant extra space`, with only a few variables to track the pointers and the maximum area.
-  </div>
+    }
+
+    return area;
+};
+```
+
+---
+
+#### ⏱️ Time Complexity
+
+* Two-pointer traversal → **O(n)**.
+* Each step moves one pointer, so at most `n` iterations.
+* **➡ Overall: O(n)**
+
+#### 🗂️ Space Complexity
+
+* Only a few variables used (`left`, `right`, `area`).
+* **➡ O(1)** extra space.
+
+---
+
+#### 🧠 Notes
+
+* The key observation is that the area is constrained by the shorter line.
+* Moving the taller line doesn’t help, but moving the shorter one might lead to a larger area.
+
 </details>
+
 
 ### Sliding Window
 <details>
